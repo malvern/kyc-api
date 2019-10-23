@@ -1,22 +1,22 @@
 ## Spring Boot Testing
 
-In this article,we will discuss Spring Boot Testing covering Unit Tests and Integration tests.
+In this article,we will discuss Test Driven Development using SpringBoot covering Unit Tests and Integration tests.
 
-To simplify this article we will create a simple 4-tier rest application that allows system users to capture customer details.
+To simplify this article we will create a simple 4-tier SpringBoot application that allows system users to capture customer personal details.
 
-We will develop this application from `Domain` ----> `Repository` ----> `Business` ---> `api`
+This application will be developed from  `Domain` ----> `Repository` ----> `Business` ---> `api`
 
 Packages `utils` and `config` were created for responses and application configurations respectively.
 
 ### Background
-Many times as developers we get stuck with the following questions when it comes to TDD.
+Many times as developers we get stuck with the following questions when it comes to Test Driven Development.
   - What to Test?
   - Where to start?
   - How to continue?
   - How to know when you are done?
  
 The answer to all these questions is start with **happy path** (normal path of execution through a use case ) then 
-conclude with corner cases (CORRECT).[ Conformance, Ordering, Range, Reference, Existence, Cardinality, Time ].
+conclude with corner cases thus ***CORRECT***.(Conformance, Ordering, Range, Reference, Existence, Cardinality, Time).
 
 In this article we will focus mainly on **happy path** for simplicity.
 
@@ -25,7 +25,7 @@ We need the following fields in the domain/entity class `name`,`surname` and `ag
 
 Using Test Driven Development(TDD)cycle let `CustomerUnitTest` drives the creation of `Customer` bean.
 
-`spring-boot-starter-test` comes in with a lot of userful libraries for testing such as `JUnit4/5,AssertJ,Hamcrest,
+`spring-boot-starter-test` is used as it comes in with a lot of userful libraries for testing such as `JUnit4/5,AssertJ,Hamcrest,
 Mockito,JSONAssert,JsonPath`.
 
 Lets make use of JUnit4 library for `domain` unit test
@@ -53,12 +53,12 @@ Lets make use of JUnit4 library for `domain` unit test
                    }
 
 
-That's it for `domain` test.Since it makes our test pass.
+That's it for `domain` test.Since it makes our test *go green*.
 
 #### 2. Repository Layer
 This is the persistence layer.
-Lets utilise JpaRepository interface that is provided by Spring via `spring-boot-starter-data-jpa`
- dependency in designing `CustomerRepository` However,TDD cycle will take us to `DataJpaTest` and `SpringRunner`
+Lets utilise `JpaRepository interface` that is provided by Spring via `spring-boot-starter-data-jpa`
+ as our main dependency in designing `CustomerRepository` However,We need the following for tests isolation `DataJpaTest` and `SpringRunner`
  - DataJpaTest
  
    is used to test JPA layer,by default this annotation will do following this for us:
@@ -99,7 +99,7 @@ Lets utilise JpaRepository interface that is provided by Spring via `spring-boot
                          
                           }
     
-`TestEntityManager` can also be used for repository tests as it provides similar fuctionalities as 
+`TestEntityManager` can also be used for repository tests as it provides similar functionalities as 
  the standard `JPA EntityManager`.
  
                            @RunWith(SpringRunner.class)
@@ -138,19 +138,19 @@ Lets utilise JpaRepository interface that is provided by Spring via `spring-boot
 
 #### 3. Business Layer
 In this layer we are simply developing business logic(*how the application behaves*).
-For instance  When creating `customer` what should be returned to the *system user* ?
+For instance  When creating `customer` what should be returned to by the *system* to  *system user* ?
 
-What will happen if the `customer` details already exists in the ***database***?
+What will happen if the `customer` details already exists in the ***system database***?
 
 All these issues should be addressed here in this tutorial we will focus mainly on the first one.
 
 Successfull creation of `customer`  will return `narrative(String)` and `success(true)`.
 
-Business layer depends on the repository layer hence we will inject `CustomerRepository` class.
+Business layer depends on the repository layer hence we will inject `CustomerRepository` bean into the business layer.
 
-Test should run in *isolation* hence to achieve `Mockito` library to *mock* `repository` layer
+*Test should run in *isolation* hence to achieve `Mockito` library to *mock* `repository` layer*
 
-*Programming to an `interface`*
+*Programming to an `interface` lets start with `CustomerServiceUnitTest`*
  
 `CustomerServiceUnitTest` : Test customer creation in business layer
 
@@ -332,7 +332,7 @@ Testing customer Serialization and Deserialization
                           }
 
              
-We simplified `integration test` so that it doesn't return created `customer object`,however in a scenario were a
+We have simplified `integration test` so that it doesn't return created `customer object`,however in a scenario were a
 `customer object` is required .e.g find by id there will be a need to create a database.
 `SpringBoot` provides in-memory database for this e.g `H2 database`
 
