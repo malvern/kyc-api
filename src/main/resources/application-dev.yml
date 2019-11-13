@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    username: kyc
+    password: kycTest@@
+    url: jdbc:mysql://mysql-database-container:3306/kyc_test?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 400
+      idle-timeout: 30000
+      minimum-idle: 20
+    initialization-mode: always
+    driver-class-name: com.mysql.cj.jdbc.Driver

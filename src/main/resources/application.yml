@@ -1,0 +1,6 @@
+
+spring:
+  application:
+    name: kyc-api
+  profiles:
+    active: dev
