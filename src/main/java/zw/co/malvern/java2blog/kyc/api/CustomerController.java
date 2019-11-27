@@ -1,13 +1,11 @@
 package zw.co.malvern.java2blog.kyc.api;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zw.co.malvern.java2blog.kyc.business.CustomerService;
 import zw.co.malvern.java2blog.kyc.domain.Customer;
 import zw.co.malvern.java2blog.kyc.utils.CommonResponse;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api")
 public class CustomerController {

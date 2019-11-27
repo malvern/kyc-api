@@ -12,6 +12,7 @@
 	<artifactId>kyc-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kyc-api</name>
+	<packaging>jar</packaging>
 	<description>Know your customer api end point</description>
 
 	<properties>

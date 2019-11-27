@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql-database:
+      image: mysql:8.0.18
+      environment:
+        MYSQL_ROOT_PASSWORD: developer@@
+      volumes:
+            - /data/mysql
+      ports:
+        - 127.0.0.1:3307:3306/tcp
+  kyc-api:
+        image: kyc-api
+        ports:
+          - 127.0.0.1:9090:9090/tcp
+        depends_on:
+         - mysql-database
+        environment:
+           - DATABASE_HOST=mysql-database
+           - DATABASE_USER= root
+           - DATABASE_PASSWORD= developer@@
+           - DATABASE_NAME= kycTest
+           - DATABASE_PORT= 3306
+        environment:
+             - "SPRING_PROFILES_ACTIVE=dev"

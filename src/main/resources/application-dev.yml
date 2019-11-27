@@ -1,18 +1,22 @@
+server:
+  port: 9090
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: lou
+    username: lou
+    url: jdbc:h2:mem:lou
   jpa:
     hibernate:
       ddl-auto: update
-    database: mysql
-    show-sql: false
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  datasource:
-    username: kyc
-    password: kycTest@@
-    url: jdbc:mysql://mysql-database-container:3306/kyc_test?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      maximum-pool-size: 400
-      idle-timeout: 30000
-      minimum-idle: 20
-    initialization-mode: always
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    database-platform: org.hibernate.dialect.H2Dialect
+  servlet:
+    multipart:
+      max-file-size: 5MB
+
